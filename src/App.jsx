@@ -1,14 +1,17 @@
 import './App.css';
-import Login from './Components/Login';
+import {Route, Routes} from 'react-router-dom'
+import Header from './Components/Header';
+import Home from './Components/Home';
 
 function App() {
   return (
     <div className="App">
-      <h1 className="text-3xl font-bold underline">
-        HI! PokéMon FrontEnd Here
-      </h1>
-      <hr />
-      < Login />
+
+      {/* HEADER */}
+      <Header />
+      <Routes>
+        <Route exact path='/' element={<Home />}/>
+      </Routes>
     </div>
   );
 }
