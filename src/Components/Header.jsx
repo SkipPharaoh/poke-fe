@@ -24,7 +24,7 @@ function Header() {
         <div className="Header">
             
             {/* Nav Bar */}
-            <nav className="flex items-center justify-between flex-wrap dark:bg-black bg-white p-6">
+            <nav className="flex items-center justify-between flex-wrap dark:bg-black bg-white p-3 mb-10">
 
                 {/* LOGO */}
                 <div className="flex items-center flex-shrink-0 mr-6 w-14">
@@ -89,7 +89,7 @@ function Header() {
                     </button>
                 </div>
 
-                <div className={`w-full block flex-grow md:flex md:w-auto ${open}`}>
+                <div className={`block flex-grow md:flex md:w-auto ${open}`}>
 
                     {/* Page Section Button/Links */}  
                     <div className="text-xl md:flex-grow md:text-right">
