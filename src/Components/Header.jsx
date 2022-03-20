@@ -29,7 +29,7 @@ function Header() {
                 {/* LOGO */}
                 <div className="flex items-center flex-shrink-0 mr-6 w-14">
                     <a className="font-semibold text-xl tracking-tight" href="/">
-                        <img src="https://cdn-icons-png.flaticon.com/512/287/287226.png" alt="Header Photo" />
+                        <img src="https://cdn-icons-png.flaticon.com/512/287/287226.png" alt="Header" />
                     </a>
                 </div>
 
@@ -71,7 +71,7 @@ function Header() {
 
                 {/* Search Bar */}
                 <div className="sm:w-7/12 md:w-5/12 px-4 flex-wrap text-right items-stretch md:m-auto">
-                    <input type="text" className="px-2 py-1 h-8 border border-solid  border-blue-500 rounded-full text-sm leading-snug text-black bg-blue-100 shadow-none outline-none focus:outline-none focus:w-full font-normal flex-1 border-l-0 placeholder-gray-400" placeholder="Search" />
+                    <input type="text" className="px-2 py-1 h-8 border border-solid  border-blue-500 rounded-full text-sm leading-snug text-black bg-blue-100 shadow-none outline-none focus:outline-none focus:w-full font-normal flex-1 border-l-0 placeholder-gray-400 transition duration-300" placeholder="Who's That Pokémon?" />
                 </div>
 
 
@@ -93,18 +93,18 @@ function Header() {
                     <div className="text-xl md:flex-grow md:text-right">
 
                         {/* Pokémon */}
-                        <a href="#" className="block mt-4 md:inline-block md:mt-0 hover:text-blue-100 dark:text-white text-black mr-4">
+                        <a href="#about" className="block mt-4 md:inline-block md:mt-0 hover:text-blue-100 dark:text-white text-black mr-4">
                         Pokémon
                         </a>
 
-                        {/* Version */}
+                        {/* Games */}
                         <a href="#skills" className="block mt-4 md:inline-block md:mt-0 dark:text-white text-black mr-4">
-                            Version
+                            Games
                         </a>
 
-                        {/* Something Else */}
+                        {/* Locations */}
                         <a href="#projects" className="block mt-4 md:inline-block md:mt-0 dark:text-white text-black">
-                            Something
+                            Locations
                         </a>
                     </div>
                 </div>
