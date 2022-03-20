@@ -27,11 +27,10 @@ function Header() {
             <nav className="flex items-center justify-between flex-wrap dark:bg-black bg-white p-6">
 
                 {/* LOGO */}
-                <div className="flex items-center flex-shrink-0 text-white mr-6">
+                <div className="flex items-center flex-shrink-0 mr-6 w-14">
                     <a className="font-semibold text-xl tracking-tight" href="/">
-                        <></>
+                        <img src="https://cdn-icons-png.flaticon.com/512/287/287226.png" alt="Header Photo" />
                     </a>
-                    
                 </div>
 
                 {/* Dark Mode Toggle Container */}
@@ -69,8 +68,15 @@ function Header() {
                     </button>
                 </div>
 
+
+                {/* Search Bar */}
+                <div className="sm:w-7/12 md:w-5/12 px-4 flex-wrap text-right items-stretch md:m-auto">
+                    <input type="text" className="px-2 py-1 h-8 border border-solid  border-blue-500 rounded-full text-sm leading-snug text-black bg-blue-100 shadow-none outline-none focus:outline-none focus:w-full font-normal flex-1 border-l-0 placeholder-gray-400" placeholder="Search" />
+                </div>
+
+
                 {/* Collapse Icon */}
-                <div className="block lg:hidden">
+                <div className="block md:hidden">
                     <button onClick={toggleMenu} className="flex items-center px-3 py-2 border rounded bg-white border-black hover:border-white hover:bg-blue-500">
                         <svg 
                             className="fill-current h-6 w-6" 
@@ -83,30 +89,25 @@ function Header() {
                     </button>
                 </div>
 
-                <div className={`w-full block flex-grow lg:flex lg:items-center lg:w-auto ${open}`}>
+                <div className={`w-full block flex-grow md:flex md:w-auto ${open}`}>
 
                     {/* Page Section Button/Links */}  
-                    <div className="text-xl lg:flex-grow">
+                    <div className="text-xl md:flex-grow md:text-right">
 
                         {/* Pokémon */}
-                        <a href="#" className="block mt-4 lg:inline-block lg:mt-0 hover:text-blue-100 dark:text-white text-black mr-4">
+                        <a href="#" className="block mt-4 md:inline-block md:mt-0 hover:text-blue-100 dark:text-white text-black mr-4">
                         Pokémon
                         </a>
 
                         {/* Version */}
-                        <a href="#skills" className="block mt-4 lg:inline-block lg:mt-0 dark:text-white text-black mr-4">
+                        <a href="#skills" className="block mt-4 md:inline-block md:mt-0 dark:text-white text-black mr-4">
                             Version
                         </a>
 
                         {/* Something Else */}
-                        <a href="#projects" className="block mt-4 lg:inline-block lg:mt-0 dark:text-white text-black">
+                        <a href="#projects" className="block mt-4 md:inline-block md:mt-0 dark:text-white text-black">
                             Something
                         </a>
-                    </div>
-
-                    {/* Search */}
-                    <div>
-                        <></>
                     </div>
                 </div>
             </nav>
