@@ -5,17 +5,11 @@ import UserDarkMode from './UserDarkMode'
 function Header() {
     // States //
     const [isOpen, setIsOpen] = useState(false)
-    const [dropOpen, setDropOpen] = useState(false)
     const [colorTheme, setColorTheme] = UserDarkMode()
 
     // Toggle Function For Collapsed Header //
     const toggleMenu = () => {
         setIsOpen(!isOpen)
-    }
-
-    // Toggle Functio For Dropdown Menu //
-    const toggleDrop = () => {
-        setDropOpen(!dropOpen)
     }
 
     // Dark Mode Function //
@@ -25,7 +19,6 @@ function Header() {
 
     // Variables //
     const open = isOpen ? 'block' : 'hidden'
-    const dropMenu = dropOpen ? 'block' : 'hidden'
 
     return (
         <div className="Header">
@@ -84,7 +77,7 @@ function Header() {
 
                 {/* Collapse Icon */}
                 <div className="block md:hidden">
-                    <button onClick={toggleMenu} id="dropdownSmallButton" data-dropdown-toggle="dropdownSmall" className="flex items-center px-3 py-2 mr-3 mb-3 text-sm font-medium text-center border rounded-full focus:ring-4 focus:ring-blue-700 bg-white border-black hover:border-white hover:bg-blue-500 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 dark:text-white" 
+                    <button onClick={toggleMenu} className="flex items-center px-3 py-2 mr-3 mb-3 text-sm font-medium text-center border rounded-full focus:ring-4 focus:ring-blue-700 bg-white border-black hover:border-white hover:bg-blue-500 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 dark:text-white" 
                     type="button"
                     >
                         Poké-Menu 
