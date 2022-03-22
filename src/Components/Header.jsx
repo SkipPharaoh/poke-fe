@@ -82,7 +82,7 @@ function Header() {
                     </button>
                 </div>
 
-                <div className={`w-full block flex-grow lg:flex lg:items-center lg:w-auto ${open}`}>
+                <div className={`w-full block flex-grow md:w-auto md:flex lg:flex lg:items-center lg:w-auto ${open}`}>
 
                     {/* Page Section Button/Links */}  
                     <div className="text-xl md:flex-grow md:text-right">
