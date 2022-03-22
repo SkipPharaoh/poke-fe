@@ -16,7 +16,7 @@ function PokemonList({name, image, loading}) {
                 <div className="flex justify-center items-center m-10 p-18 cursor-pointer w-20 h-20 rounded-full border">
                     <img className='w-16 h-16' src={image} alt={name} />
                 </div>
-                {tooltipStatus == 1 && (
+                {tooltipStatus === 1 && (
                     <div role="tooltip" className="z-20 -mt-10 w-232 absolute transition duration-150 ease-in-out left-0 ml-8 shadow-lg bg-white p-4 rounded-full dark:bg-gray-900 ">
                         <p className="text-sm text-center font-bold text-gray-800 pb-1 dark:text-white">{name}</p>
                     </div>

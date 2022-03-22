@@ -29,9 +29,9 @@ function Header() {
 
                 {/* LOGO */}
                 <div className="flex items-center flex-shrink-0 mr-6 w-14">
-                    <a className="font-semibold text-xl tracking-tight" href="/">
+                    <Link className="font-semibold text-xl tracking-tight" to="/">
                         <img src="https://cdn-icons-png.flaticon.com/512/287/287226.png" alt="Header" />
-                    </a>
+                    </Link>
                 </div>
 
                 {/* Dark Mode Toggle Container */}
@@ -70,12 +70,6 @@ function Header() {
                 </div>
 
 
-                {/* Search Bar */}
-                <div className="sm:w-7/12 md:w-5/12 px-4 flex-wrap text-right items-stretch md:m-auto">
-                    <input type="text" className="px-2 py-1 h-8 border border-solid  border-blue-500 rounded-full text-sm leading-snug text-black bg-blue-100 shadow-none outline-none focus:outline-none focus:w-full font-normal flex-1 border-l-0 placeholder-gray-400 transition duration-300" placeholder="Who's That Pokémon?" />
-                </div>
-
-
                 {/* Collapse Icon */}
                 <div className="block md:hidden">
                     <button onClick={toggleMenu} className="flex items-center px-3 py-2 mr-3 mb-3 text-sm font-medium text-center border rounded-full focus:ring-4 focus:ring-blue-700 bg-white border-black hover:border-white hover:bg-blue-500 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 dark:text-white" 
@@ -99,14 +93,14 @@ function Header() {
                         </Link>
 
                         {/* Games */}
-                        <a href="#skills" className="block mt-4 md:inline-block md:mt-0 dark:text-white text-black mr-4">
+                        <Link to="/games" className="block mt-4 md:inline-block md:mt-0 dark:text-white text-black mr-4">
                             Games
-                        </a>
+                        </Link>
 
                         {/* Locations */}
-                        <a href="#projects" className="block mt-4 md:inline-block md:mt-0 dark:text-white text-black">
+                        <Link to="/locations" className="block mt-4 md:inline-block md:mt-0 dark:text-white text-black">
                             Locations
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </nav>

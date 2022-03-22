@@ -5,10 +5,14 @@ import Home from './Components/Home';
 import {useState, useEffect} from 'react'
 import PokemonList from './Components/PokemonList';
 import axios from 'axios'
+import Games from './Components/Games';
+import Locations from './Components/Locations';
+import Sort from './Components/Sort';
+import Search from './Components/Search';
+import Filter from './Components/Filter';
 
 function App() {
   // States //
-  const [pokemon, setPokemon] = useState([])
   const [allPokemon, setAllPokemon] = useState([])
   const [currentPage, setCurrentPage] = useState("https://pokeapi.co/api/v2/pokemon?limit=20")
   const [previousPage, setPreviousPage] = useState('')
@@ -22,7 +26,6 @@ function App() {
 
       setPreviousPage(data.previous)
       setNextPage(data.next)
-      console.log(data)
     
       const createPokemon = (result) => {
         result.forEach( async (pokemon) => {
@@ -39,7 +42,6 @@ function App() {
       
     })
     
-    console.log(allPokemon)
   }
 
 
@@ -75,8 +77,23 @@ function App() {
 
       <Routes>
         <Route exact path='/' element={<Home />}/>
+
         <Route exact path='/pokemon' element={
           <div>
+            <div className="flex justify-center align-middle">
+              <div>
+                <Search />
+              </div>
+
+              <div className='mx-5'>
+                <Sort />
+              </div>
+
+              <div>
+                <Filter />
+              </div>
+
+            </div>
             <div className='flex flex-row flex-wrap'>
               {poke}
             </div>
@@ -84,7 +101,13 @@ function App() {
               <button onClick={toNextPage}>Load More</button>
             </div>
           </div>
-          } />
+          } 
+        />
+
+        <Route exact path='/games' element={<Games />} />
+
+        <Route exact path='/locations' element={<Locations />} />
+
       </Routes>
     </div>
   );
