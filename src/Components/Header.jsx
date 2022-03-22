@@ -1,6 +1,7 @@
 // IMPORTS //
 import {useState} from 'react'
 import UserDarkMode from './UserDarkMode'
+import {Link} from 'react-router-dom'
 
 function Header() {
     // States //
@@ -93,9 +94,9 @@ function Header() {
                     <div className="text-xl md:flex-grow md:text-right">
 
                         {/* Pokémon */}
-                        <a href="#about" className="block mt-4 md:inline-block md:mt-0 hover:text-blue-100 dark:text-white text-black mr-4">
+                        <Link to="/pokemon" className="block mt-4 md:inline-block md:mt-0 hover:text-blue-100 dark:text-white text-black mr-4">
                         Pokémon
-                        </a>
+                        </Link>
 
                         {/* Games */}
                         <a href="#skills" className="block mt-4 md:inline-block md:mt-0 dark:text-white text-black mr-4">

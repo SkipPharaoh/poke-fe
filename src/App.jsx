@@ -80,7 +80,7 @@ function App() {
             <div className='flex flex-row flex-wrap'>
               {poke}
             </div>
-            <div>
+            <div className='my-10'>
               <button onClick={toNextPage}>Load More</button>
             </div>
           </div>
