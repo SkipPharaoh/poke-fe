@@ -1,5 +1,5 @@
 import './App.css';
-import {Route, Routes} from 'react-router-dom'
+import {Route, Routes, Switch} from 'react-router-dom'
 import Header from './Components/Header';
 import Home from './Components/Home';
 import {useState, useEffect} from 'react'
@@ -10,6 +10,7 @@ import Locations from './Components/Locations';
 import Sort from './Components/Sort';
 import Search from './Components/Search';
 import Filter from './Components/Filter';
+import PokeInfo from './Components/PokeInfo';
 
 function App() {
   // States //
@@ -32,8 +33,6 @@ function App() {
           const resp = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`).then(resp => {
             const data = resp.data
             setAllPokemon(currentList => [...currentList, data])
-            // setAllPokemon(data)
-            // allPokemon.push(data)
           })
           
         })
@@ -76,7 +75,7 @@ function App() {
       <Header />
 
       <Routes>
-        <Route exact path='/' element={<Home />}/>
+        <Route exact path='/' element={<Home />} />
 
         <Route exact path='/pokemon' element={
           <div>
@@ -103,6 +102,8 @@ function App() {
           </div>
           } 
         />
+
+        <Route exact path='/:pokeID' element={<PokeInfo/>} />
 
         <Route exact path='/games' element={<Games />} />
 
