@@ -58,8 +58,8 @@ function PokeInfo() {
 
             <h1> {} </h1>
 
-            <h1> Height: {height}</h1>
-            <h1> Weight: {weight}</h1>
+            <h1> Height: {height * 0.1} m</h1>
+            <h1> Weight: {weight * 0.1} kg</h1>
 
             Types: {pokeType}
             Abilities: {pokeAbility}
