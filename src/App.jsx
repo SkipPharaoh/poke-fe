@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Routes, Switch } from "react-router-dom";
+import { Route, Routes, Link } from "react-router-dom";
 import Header from "./Components/Header";
 import Home from "./Components/Home";
 import { useState, useEffect } from "react";
@@ -21,14 +21,12 @@ function App() {
   const [nextPage, setNextPage] = useState("");
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
-  const [results, setResults] = useState();
+  const [sort, setSort] = useState("");
   const [value, setValue] = useState("");
-
-  // Destructuring //
-  const { types } = allPokemon;
+  const [tooltipStatus, setTooltipStatus] = useState(0);
 
   const getAllPokemon = async () => {
-    const res = await axios.get(currentPage).then((res) => {
+    await axios.get(currentPage).then((res) => {
       const { data } = res;
       const { results } = data;
 
@@ -57,21 +55,60 @@ function App() {
     setCurrentPage(nextPage);
   };
 
-  const filtered = () => {
-    types
-      .filter((type) => (type.name = value))
-      .map((filteredPoke) => <div className="">{filteredPoke}HI</div>);
-  };
+  const filtered = !allPokemon
+    ? "Loading..."
+    : allPokemon
+        .filter((poke) => poke.types.name === value)
+        .map((filteredPoke, idx) => (
+          <div className="flex flex-row" key={idx}>
+            <div className="flex-col md:flex-row flex items-center md:justify-center">
+              {/*Code Block for white tooltip starts*/}
+              <div
+                className="relative mt-20 md:mt-0 w-full"
+                // onMouseEnter={() => setTooltipStatus(1)} onMouseLeave={() => setTooltipStatus(0)}
+              >
+                <div className="flex justify-center items-center m-10 p-0 cursor-pointer w-20 h-20 rounded-full border hover:bg-gray-500 hover:w-24 hover:h-24 transition duration-500">
+                  <Link to={`/pokemon/${poke.id}`}>
+                    <img
+                      className="w-16 h-16 hover:w-20"
+                      src={filteredPoke.sprites.other.dream_world.front_default}
+                      alt={filteredPoke.name}
+                    />
+                  </Link>
+                </div>
+                {tooltipStatus === 1 && (
+                  <div
+                    role="tooltip"
+                    className="z-20 -mt-10 w-232 absolute transition duration-150 ease-in-out left-0 ml-8 shadow-lg bg-white p-4 rounded-full dark:bg-gray-900 "
+                  >
+                    <p className="text-sm text-center font-bold text-gray-800 pb-1 dark:text-white">
+                      {filteredPoke.name}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        ));
 
-  // Functions //
   const filterSelected = (evt) => {
     if (evt.target.value === "all") {
       setValue(undefined);
       console.log(value);
     } else {
       setValue(evt.target.value);
+      console.log(allPokemon);
       console.log(value);
-      // filtered()
+    }
+  };
+
+  const sortSelected = (evt) => {
+    if (evt.target.value === "random") {
+      setSort(undefined);
+      console.log(sort);
+    } else {
+      setSort(evt.target.value);
+      console.log(sort);
     }
   };
 
@@ -83,7 +120,8 @@ function App() {
       loading={loading}
       key={idx}
       search={search}
-      types={types}
+      tooltipStatus={tooltipStatus}
+      setTooltipStatus={setTooltipStatus}
     />
   ));
 
@@ -106,22 +144,18 @@ function App() {
                 </div>
 
                 <div className="mx-5">
-                  <Sort />
+                  <Sort sortSelected={sortSelected} />
                 </div>
 
                 <div>
-                  <Filter
-                    allPokemon={allPokemon}
-                    value={value}
-                    filterSelected={filterSelected}
-                  />
+                  <Filter filterSelected={filterSelected} />
                 </div>
               </div>
 
               <div className="flex flex-row flex-wrap">
-                {!value ? "nothing..." : value}
-                {poke}
-                
+                {!sort ? "nothing..." : sort}
+                {!value ? poke : filtered}
+                {/* {poke} */}
               </div>
 
               <div className="my-10">

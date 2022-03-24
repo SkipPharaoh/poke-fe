@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { firstCharUpperCase } from "../Functions";
 
-function PokemonList({ name, image, id, loading, types, search }) {
-  // States //
-  const [tooltipStatus, setTooltipStatus] = useState(0);
-//   console.log(search)
+function PokemonList({ name, image, id, loading, search, tooltipStatus, setTooltipStatus }) {
+  //   console.log(search)
 
   const loadtime = () => {
     return loading ? "data that will show" : "loading info soon";
@@ -14,7 +12,6 @@ function PokemonList({ name, image, id, loading, types, search }) {
   return (
     <div className="flex flex-row">
       <div className="flex-col md:flex-row flex items-center md:justify-center">
-
         {/*Code Block for white tooltip starts*/}
         <div
           className="relative mt-20 md:mt-0 w-full"
