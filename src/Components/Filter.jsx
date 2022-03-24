@@ -1,12 +1,17 @@
 import React, {useState} from 'react'
 
-function Filter() {
-
+function Filter({allPokemon, filterSelected}) {
+  // Props //
+  const {types} = allPokemon
+  // console.log(!types ? types : types.map((type, idx) => type.name))
+  // console.log(allPokemon.name)
 
   return (
-    <div>
-        <select name="filterByTypes" id="filter">
-            <option value="">Filter By Types</option>
+    <div className='flex'>
+        <label htmlFor="filterByTypes" className='m-0'><img className='w-5' src="https://img.icons8.com/ios-glyphs/30/000000/filter.png"/></label>
+        <select name="filterByTypes" id="filter" placeholder='Filter By Types' onClick={filterSelected}>
+            <optgroup label="Filter By Types" >
+            <option value="all">All</option>
             <option value="grass">Grass</option>
             <option value="poison">Poison</option>
             <option value="fire">Fire</option>
@@ -25,6 +30,7 @@ function Filter() {
             <option value="ghost">Ghost</option>
             <option value="dragon">Dragon</option>
             <option value="dark">Dark</option>
+            </ optgroup >
         </select>
 
     </div>

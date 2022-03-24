@@ -20,6 +20,12 @@ function App() {
   );
   const [nextPage, setNextPage] = useState("");
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
+  const [results, setResults] = useState();
+  const [value, setValue] = useState("");
+
+  // Destructuring //
+  const { types } = allPokemon;
 
   const getAllPokemon = async () => {
     const res = await axios.get(currentPage).then((res) => {
@@ -32,8 +38,8 @@ function App() {
         await axios
           .get(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`)
           .then((resp) => {
-            const { data } = resp
-            
+            const { data } = resp;
+
             setAllPokemon((currentList) => [...currentList, data]);
           });
       });
@@ -51,6 +57,23 @@ function App() {
     setCurrentPage(nextPage);
   };
 
+  const filtered = () => {
+    types
+      .filter((type) => (type.name = value))
+      .map((filteredPoke) => <div className="">{filteredPoke}HI</div>);
+  };
+
+  // Functions //
+  const filterSelected = (evt) => {
+    if (evt.target.value === "all") {
+      setValue(undefined);
+      console.log(value);
+    } else {
+      setValue(evt.target.value);
+      console.log(value);
+      // filtered()
+    }
+  };
 
   const poke = allPokemon.map((pokemon, idx) => (
     <PokemonList
@@ -59,6 +82,8 @@ function App() {
       id={pokemon.id}
       loading={loading}
       key={idx}
+      search={search}
+      types={types}
     />
   ));
 
@@ -77,7 +102,7 @@ function App() {
             <div>
               <div className="flex justify-center align-middle">
                 <div>
-                  <Search />
+                  <Search search={search} setSearch={setSearch} />
                 </div>
 
                 <div className="mx-5">
@@ -85,10 +110,20 @@ function App() {
                 </div>
 
                 <div>
-                  <Filter />
+                  <Filter
+                    allPokemon={allPokemon}
+                    value={value}
+                    filterSelected={filterSelected}
+                  />
                 </div>
               </div>
-              <div className="flex flex-row flex-wrap">{poke}</div>
+
+              <div className="flex flex-row flex-wrap">
+                {!value ? "nothing..." : value}
+                {poke}
+                
+              </div>
+
               <div className="my-10">
                 <button onClick={toNextPage}>Load More</button>
               </div>

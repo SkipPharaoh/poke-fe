@@ -2,9 +2,9 @@
 import { useState } from 'react'
 
 function Search(props) {
-  // States //
-  const [search, setSearch] = useState("");
-  const [results, setResults] = useState();
+  // Props //
+  const { search, setSearch } = props
+
 
   // Functions //
   const handleSubmit = (evt) => {
@@ -14,7 +14,7 @@ function Search(props) {
   const handleSearch = (evt) => {
     // console.log(evt.target.value)
     setSearch(evt.target.value)
-    console.log(search)
+    // console.log(search)
   }
 
   return (
