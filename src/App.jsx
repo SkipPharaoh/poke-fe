@@ -11,6 +11,7 @@ import Sort from "./Components/Sort";
 import Search from "./Components/Search";
 import Filter from "./Components/Filter";
 import PokeInfo from "./Components/PokeInfo";
+import Region from "./Components/Region";
 
 function App() {
   // States //
@@ -18,19 +19,33 @@ function App() {
   const [currentPage, setCurrentPage] = useState(
     "https://pokeapi.co/api/v2/pokemon?limit=151"
   );
-  const [nextPage, setNextPage] = useState("");
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
   const [value, setValue] = useState("");
+  const [gen, setGen] = useState(0);
   const [tooltipStatus, setTooltipStatus] = useState(0);
 
+  // Objects //
+
+  const URL = {
+    "gen 1": "https://pokeapi.co/api/v2/pokemon?limit=151",
+    "gen 2": "https://pokeapi.co/api/v2/pokemon?offset=151&limit=100",
+    "gen 3": "https://pokeapi.co/api/v2/pokemon?offset=251&limit=135",
+    "gen 4": "https://pokeapi.co/api/v2/pokemon?offset=386&limit=107",
+    "gen 5": "https://pokeapi.co/api/v2/pokemon?offset=493&limit=156",
+    "gen 6": "https://pokeapi.co/api/v2/pokemon?offset=649&limit=72",
+    "gen 7": "https://pokeapi.co/api/v2/pokemon?offset=721&limit=88",
+    "gen 8": "https://pokeapi.co/api/v2/pokemon?offset=809&limit=89",
+    "others": "https://pokeapi.co/api/v2/pokemon?offset=898&limit=230",
+  }
+
+  // UseEFFECT //
+  useEffect(() => {
   const getAllPokemon = async () => {
     await axios.get(currentPage).then((res) => {
       const { data } = res;
       const { results } = data;
-
-      setNextPage(data.next);
 
       results.forEach(async (pokemon) => {
         await axios
@@ -44,16 +59,9 @@ function App() {
     });
   };
 
-  // UseEFFECT //
-  useEffect(() => {
     getAllPokemon();
-    setLoading(true);
+    // setLoading(true);
   }, [currentPage]);
-
-  // Functions //
-  const toNextPage = () => {
-    setCurrentPage(nextPage);
-  };
 
   const filtered = !allPokemon
     ? "Loading..."
@@ -112,6 +120,14 @@ function App() {
     }
   };
 
+  const regionSelected = (evt) => {
+    console.log(evt.target.value);
+    // setGen(evt.target.value);
+    console.log(URL[evt.target.value])
+    console.log(currentPage)
+    return setCurrentPage(URL[evt.target.value])
+  };
+
   const poke = allPokemon.map((pokemon, idx) => (
     <PokemonList
       name={pokemon.name}
@@ -143,6 +159,10 @@ function App() {
                   <Search search={search} setSearch={setSearch} />
                 </div>
 
+                <div>
+                  <Region regionSelected={regionSelected} />
+                </div>
+
                 <div className="mx-5">
                   <Sort sortSelected={sortSelected} />
                 </div>
@@ -156,10 +176,6 @@ function App() {
                 {!sort ? "nothing..." : sort}
                 {!value ? poke : filtered}
                 {/* {poke} */}
-              </div>
-
-              <div className="my-10">
-                <button onClick={toNextPage}>Load More</button>
               </div>
             </div>
           }

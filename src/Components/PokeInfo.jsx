@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { firstCharUpperCase } from "../Functions";
+import { firstCharUpperCase } from "../utils/Functions";
 
 function PokeInfo() {
   // States //

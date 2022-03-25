@@ -5,7 +5,7 @@ function Filter({filterSelected}) {
   return (
     <div className='flex'>
         <label htmlFor="filterByTypes" className='m-0'><img className='w-5' src="https://img.icons8.com/ios-glyphs/30/000000/filter.png" alt='filter-icon' /></label>
-        <select name="filterByTypes" id="filter" placeholder='Filter By Types' onClick={filterSelected}>
+        <select name="filterByTypes" id="filter" placeholder='Filter By Types' onChange={filterSelected}>
             <optgroup label="Filter By Types" >
             <option value="all">All</option>
             <option value="grass">Grass</option>

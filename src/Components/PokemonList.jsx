@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { firstCharUpperCase } from "../Functions";
+import { firstCharUpperCase } from "../utils/Functions";
 
 function PokemonList({ name, image, id, loading, search, tooltipStatus, setTooltipStatus }) {
   //   console.log(search)
