@@ -5,7 +5,7 @@ import Home from "./Components/Home";
 import { useState, useEffect } from "react";
 import PokemonList from "./Components/PokemonList";
 import axios from "axios";
-import Games from "./Components/Games";
+import Items from "./Components/Items";
 import Locations from "./Components/Locations";
 import Sort from "./Components/Sort";
 import Search from "./Components/Search";
@@ -18,6 +18,10 @@ function App() {
   const [allPokemon, setAllPokemon] = useState([]);
   const [currentPage, setCurrentPage] = useState(
     "https://pokeapi.co/api/v2/pokemon?limit=151"
+  );
+  const [allItems, setAllItems] = useState([]);
+  const [pageURL, setPageURL] = useState(
+    "https://pokeapi.co/api/v2/item?limit=50"
   );
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
@@ -37,31 +41,50 @@ function App() {
     "gen 6": "https://pokeapi.co/api/v2/pokemon?offset=649&limit=72",
     "gen 7": "https://pokeapi.co/api/v2/pokemon?offset=721&limit=88",
     "gen 8": "https://pokeapi.co/api/v2/pokemon?offset=809&limit=89",
-    "others": "https://pokeapi.co/api/v2/pokemon?offset=898&limit=230",
-  }
+    others: "https://pokeapi.co/api/v2/pokemon?offset=898&limit=230",
+  };
 
   // UseEFFECT //
   useEffect(() => {
-  const getAllPokemon = async () => {
-    await axios.get(currentPage).then((res) => {
-      const { data } = res;
-      const { results } = data;
+    const getAllPokemon = async () => {
+      await axios.get(currentPage).then((res) => {
+        const { data } = res;
+        const { results } = data;
 
-      results.forEach(async (pokemon) => {
-        await axios
-          .get(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`)
-          .then((resp) => {
-            const { data } = resp;
+        results.forEach(async (pokemon) => {
+          await axios
+            .get(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`)
+            .then((resp) => {
+              const { data } = resp;
 
-            setAllPokemon((currentList) => [...currentList, data]);
-          });
+              setAllPokemon((currentList) => [...currentList, data]);
+            });
+        });
       });
-    });
-  };
+    };
+
+    // Fetch W/ UseEffect //
+    const getAllItems = async () => {
+      await axios.get(pageURL).then((res) => {
+        const { data } = res;
+        const { results } = data;
+
+        results.forEach(async (item) => {
+          await axios
+            .get(`https://pokeapi.co/api/v2/item/${item.name}`)
+            .then((resp) => {
+              const { data } = resp;
+
+              setAllItems((currentList) => [...currentList, data]);
+            });
+        });
+      });
+    };
 
     getAllPokemon();
+    getAllItems();
     // setLoading(true);
-  }, [currentPage]);
+  }, [currentPage, pageURL]);
 
   const filtered = !allPokemon
     ? "Loading..."
@@ -114,6 +137,9 @@ function App() {
     if (evt.target.value === "random") {
       setSort(undefined);
       console.log(sort);
+    } else if (evt.target.value === "name") {
+      allPokemon.sort();
+      setSort(evt.target.value);
     } else {
       setSort(evt.target.value);
       console.log(sort);
@@ -123,9 +149,9 @@ function App() {
   const regionSelected = (evt) => {
     console.log(evt.target.value);
     // setGen(evt.target.value);
-    console.log(URL[evt.target.value])
-    console.log(currentPage)
-    return setCurrentPage(URL[evt.target.value])
+    console.log(URL[evt.target.value]);
+    console.log(currentPage);
+    return setCurrentPage(URL[evt.target.value]);
   };
 
   const poke = allPokemon.map((pokemon, idx) => (
@@ -136,6 +162,16 @@ function App() {
       loading={loading}
       key={idx}
       search={search}
+      tooltipStatus={tooltipStatus}
+      setTooltipStatus={setTooltipStatus}
+    />
+  ));
+
+  const pokeItem = allItems.map((item, idx) => (
+    <Items
+      name={item.name}
+      image={item.sprites.default}
+      key={idx}
       tooltipStatus={tooltipStatus}
       setTooltipStatus={setTooltipStatus}
     />
@@ -183,7 +219,26 @@ function App() {
 
         <Route exact path="/pokemon/:pokeID" element={<PokeInfo />} />
 
-        <Route exact path="/games" element={<Games />} />
+        <Route
+          exact
+          path="/items"
+          element={
+            <div>
+              <div className="title">
+                <h1 className="text-3xl font-bold underline">
+                  Relive The Nostalgia Of The PokéMon Items From Each Generation!!!
+                </h1>
+              </div>
+              <hr />
+
+
+              <div className="flex flex-row flex-wrap">
+                {pokeItem}
+              </div>
+
+            </div>
+          }
+        />
 
         <Route exact path="/locations" element={<Locations />} />
       </Routes>

@@ -92,9 +92,9 @@ function Header() {
                         Pokémon
                         </Link>
 
-                        {/* Games */}
-                        <Link to="/games" className="block mt-4 md:inline-block md:mt-0 dark:text-white text-black mr-4">
-                            Games
+                        {/* Items */}
+                        <Link to="/items" className="block mt-4 md:inline-block md:mt-0 dark:text-white text-black mr-4">
+                            Items
                         </Link>
 
                         {/* Locations */}
