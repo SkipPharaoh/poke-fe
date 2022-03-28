@@ -36,13 +36,24 @@ function PokeInfo() {
   const pokeAbility = !abilities ? (
     <h1>Loading abilities...</h1>
   ) : (
-    abilities.map((info, idx) => <h1 key={idx}> {info.ability.name}</h1>)
+    abilities.map((info, idx) => (
+      <h1 key={idx}>
+        {info.is_hidden === true ? "Hidden: " : "Normal: "}
+        {info.ability.name}
+      </h1>
+    ))
   );
+
+  !types ? console.log("isHidden") : console.log(types);
 
   const pokeStats = !stats ? (
     <h1>Stats loading...</h1>
   ) : (
-    stats.map((info, idx) => <h1 key={idx}> {info.base_stat} </h1>)
+    stats.map((info, idx) => (
+      <h1 key={idx}>
+        {firstCharUpperCase(info.stat.name)}: {info.base_stat}{" "}
+      </h1>
+    ))
   );
 
   const pokeType = !types ? (
@@ -52,28 +63,54 @@ function PokeInfo() {
   );
 
   return (
-    <div>
+    <div className="pb-10">
       {!pokemon ? (
         <h1>Pokemon loading...</h1>
       ) : (
         <div>
           <div className="text-left">
-            <button onClick={() => window.history.back()} className="border rounded-full px-3 bg-blue-500 text-white">Back To Pokédex</button>
+            <button
+              onClick={() => window.history.back()}
+              className="border rounded-full px-3 bg-blue-500 text-white"
+            >
+              Back To Pokédex
+            </button>
           </div>
 
-          <strong className="">{`PokéInfo for pokémon # ${id}`} </strong>
+          <div className="flex flex-col">
+            <strong className="text-2xl">{`PokéInfo for pokémon # ${id}`}</strong>
+          </div>
+
 
           <div className="">
-            <h1 className="">
-              {`#${pokeID}`} {name} <img src={sprite} alt={name} />
-            </h1>
-            <img src={image} alt={name} />
-            <h1> {} </h1>
-            <h1> Height: {height * 0.1} m</h1>
-            <h1> Weight: {weight * 0.1} kg</h1>
-            Types: {pokeType}
-            Abilities: {pokeAbility}
-            Stats: {pokeStats}
+            <div className="flex justify-center">
+              <h1 className="">
+                {`#${pokeID}`} {name} 
+                <img src={sprite} alt={name} />
+              </h1>
+            </div>
+
+            <div className="flex">
+              <img src={image} alt={name} />
+            </div>
+
+            <div className="">
+              <h1> <u>Height:</u> {(height * 0.1).toFixed(2)} m</h1>
+              <h1> <u>Weight:</u> {(weight * 0.1)} kg</h1>
+            </div>
+
+            <div className="">
+              <u>Types:</u> {pokeType}
+            </div>
+
+            <div className="">
+              <u>Abilities:</u> {pokeAbility}
+            </div>
+
+            <div className="">
+              <u>Stats:</u> {pokeStats}
+            </div>
+
           </div>
         </div>
       )}

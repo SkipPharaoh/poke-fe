@@ -6,7 +6,6 @@ import { useState, useEffect } from "react";
 import PokemonList from "./Components/PokemonList";
 import axios from "axios";
 import Items from "./Components/Items";
-import Locations from "./Components/Locations";
 import Sort from "./Components/Sort";
 import Search from "./Components/Search";
 import Filter from "./Components/Filter";
@@ -25,7 +24,7 @@ function App() {
   );
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
-  const [sort, setSort] = useState("");
+  const [sorting, setSorting] = useState("");
   const [value, setValue] = useState("");
   const [gen, setGen] = useState(0);
   const [tooltipStatus, setTooltipStatus] = useState(0);
@@ -124,25 +123,21 @@ function App() {
 
   const filterSelected = (evt) => {
     if (evt.target.value === "all") {
-      setValue(undefined);
-      console.log(value);
+      console.log(evt.target.value);
     } else {
-      setValue(evt.target.value);
-      console.log(allPokemon);
-      console.log(value);
+      console.log(evt.target.value);
     }
   };
 
   const sortSelected = (evt) => {
     if (evt.target.value === "random") {
-      setSort(undefined);
-      console.log(sort);
+      console.log(evt.target.value);
     } else if (evt.target.value === "name") {
-      allPokemon.sort();
-      setSort(evt.target.value);
+      // allPokemon.name.sort();
+      setSorting(evt.target.value);
     } else {
-      setSort(evt.target.value);
-      console.log(sort);
+      setSorting(evt.target.value);
+      console.log(sorting);
     }
   };
 
@@ -151,7 +146,7 @@ function App() {
     // setGen(evt.target.value);
     console.log(URL[evt.target.value]);
     console.log(currentPage);
-    return setCurrentPage(URL[evt.target.value]);
+    setCurrentPage(URL[evt.target.value]);
   };
 
   const poke = allPokemon.map((pokemon, idx) => (
@@ -209,7 +204,7 @@ function App() {
               </div>
 
               <div className="flex flex-row flex-wrap">
-                {!sort ? "nothing..." : sort}
+                {!sorting ? "nothing..." : sorting}
                 {!value ? poke : filtered}
                 {/* {poke} */}
               </div>
@@ -239,8 +234,6 @@ function App() {
             </div>
           }
         />
-
-        <Route exact path="/locations" element={<Locations />} />
       </Routes>
     </div>
   );

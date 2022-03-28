@@ -96,11 +96,6 @@ function Header() {
                         <Link to="/items" className="block mt-4 md:inline-block md:mt-0 dark:text-white text-black mr-4">
                             Items
                         </Link>
-
-                        {/* Locations */}
-                        <Link to="/locations" className="block mt-4 md:inline-block md:mt-0 dark:text-white text-black">
-                            Locations
-                        </Link>
                     </div>
                 </div>
             </nav>
